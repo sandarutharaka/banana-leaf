@@ -1,0 +1,2 @@
+import {Button} from '@/components/ui';
+export default function NotFound(){return <main id="main" className="container receipt"><p className="eyebrow">404 · A DIFFERENT PATH</p><h1>This page has turned a new leaf.</h1><p>We couldn’t find the page you’re looking for. Explore our leaves or get in touch with your enquiry.</p><div className="button-row"><Button href="/">Back to Home</Button><Button href="/contact" secondary>Contact Us</Button></div></main>}

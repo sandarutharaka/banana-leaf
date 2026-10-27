@@ -1,0 +1,9 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {contactSchema,colomboToday,quantityLabel} from '../src/lib/contact/schema';
+const base={submissionStartedAt:Date.now(),submissionId:'11111111-1111-4111-8111-111111111111',name:'සඳරු Silva',email:' TEST@EXAMPLE.COM ',phone:'+44 (0)20 1234',company:'',type:'general',product:'not-sure',quantity:'',unit:'',dimensions:'',town:'Colombo',country:'Sri Lanka',preferredDate:'',message:'A gathering with banana leaves.',privacy:true,website:'',botToken:''};
+test('normalizes fields and blank quantity',()=>{const p=contactSchema.parse(base);assert.equal(p.email,'test@example.com');assert.equal(quantityLabel(p),'Not specified');assert.deepEqual(p.destination,{town:'Colombo',country:'Sri Lanka'})});
+test('whole leaf and kg quantity limits',()=>{for(const [quantity,unit,valid] of [['1','leaves',true],['1.5','leaves',false],['0.15','kg',true],['0.155','kg',false],['1000001','leaves',false],['100001','kg',false],['0','kg',false],['1','',false]] as const)assert.equal(contactSchema.safeParse({...base,quantity,unit}).success,valid,`${quantity} ${unit}`)});
+test('overseas country required; domestic country normalized',()=>{assert.equal(contactSchema.safeParse({...base,type:'overseas',country:'',town:''}).success,false);assert.equal(contactSchema.parse({...base,type:'overseas',country:'Japan',town:''}).destination.country,'Japan');assert.equal(contactSchema.parse({...base,country:'Japan'}).destination.country,'Sri Lanka')});
+test('strict fields, enums, dates and consent',()=>{for(const change of [{to:'attacker@example.com'},{product:'unknown'},{privacy:false},{preferredDate:'2020-01-01'},{preferredDate:'2099-02-30'},{phone:'x\ny'},{name:'x'},{message:'short'}])assert.equal(contactSchema.safeParse({...base,...change}).success,false);assert.equal(contactSchema.safeParse({...base,preferredDate:colomboToday()}).success,true)});
+export {base};

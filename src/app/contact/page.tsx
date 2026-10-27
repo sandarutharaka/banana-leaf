@@ -1,0 +1,7 @@
+import type {Metadata} from 'next';
+import {EnquiryForm} from '@/components/enquiry-form';
+import {copy} from '@/content/site';
+import {selectedProduct,enquiryTypes} from '@/content/products';
+import {siteConfig,whatsappUrl} from '@/config/site';
+export const metadata:Metadata={title:'Contact Us · Banana leaf enquiries'};
+export default async function Contact({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){const q=await searchParams;const product=selectedProduct(typeof q.product==='string'?q.product:undefined);const rawType=typeof q.type==='string'?q.type:'general';const type=enquiryTypes.includes(rawType as typeof enquiryTypes[number])&&(rawType!=='overseas'||siteConfig.showOverseasEnquiries)?rawType:'general';return <main id="main" className="contact-main" tabIndex={-1}><div className="container contact-layout"><div className="contact-intro"><p className="eyebrow">CONTACT US</p><h1>{copy.contact.title}</h1><p>{copy.contact.description}</p><div className="contact-channels"><span>Sri Lanka</span>{siteConfig.publicEmail&&<a href={`mailto:${siteConfig.publicEmail}`}>{siteConfig.publicEmail}</a>}{whatsappUrl&&<a href={whatsappUrl}>Chat on WhatsApp ↗</a>}</div><img className="contact-leaf" src="/illustrations/leaf-intro-left.svg" alt=""/></div><EnquiryForm key={`${product}-${type}`} initialProduct={product} initialType={type} mock={(process.env.EMAIL_MODE||'mock')==='mock'}/></div></main>}

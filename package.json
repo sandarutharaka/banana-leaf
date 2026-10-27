@@ -1,0 +1,7 @@
+{
+ "name":"banana-leaf","version":"1.0.0","private":true,
+ "scripts":{"dev":"next dev","build":"next build","start":"next start","typecheck":"tsc --noEmit","test":"tsx --test tests/*.test.ts","test:e2e":"playwright test","email:preview":"tsx scripts/preview-emails.tsx","assets:optimize":"node scripts/optimize-assets.mjs"},
+ "engines":{"node":">=22.0.0"},
+ "dependencies":{"next":"latest","react":"latest","react-dom":"latest","gsap":"^3.14.2","@gsap/react":"^2.1.2","zod":"^4.3.6","resend":"latest","server-only":"^0.0.1","@upstash/redis":"latest","@marsidev/react-turnstile":"latest"},
+ "devDependencies":{"typescript":"^5.9.3","@types/node":"^22.0.0","@types/react":"^19.0.0","@types/react-dom":"^19.0.0","tailwindcss":"^4.1.0","@tailwindcss/postcss":"^4.1.0","@playwright/test":"latest","@axe-core/playwright":"latest","tsx":"^4.21.0","sharp":"^0.34.5","@fontsource/dm-serif-display":"^5.2.8","@fontsource/manrope":"^5.2.8"}
+}

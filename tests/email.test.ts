@@ -1,0 +1,6 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {contactSchema} from '../src/lib/contact/schema';
+import {createMessages} from '../src/lib/email/messages';
+import {validEnquiry} from './fixture';
+test('fixed recipient, correct reply destinations, escaped owner text and safe acknowledgement',async()=>{const data=contactSchema.parse({...validEnquiry,name:'සඳරු <script>evil</script>',message:'<script>alert(1)</script>\nhttps://untrusted.invalid',quantity:'0.25',unit:'kg'});const result=await createMessages({data,reference:'LEAF-test',submittedAt:new Date().toISOString(),settings:{brandName:'YOUR_BRAND',siteUrl:'http://localhost:3000'}},{from:'sender@example.com',ownerTo:'fixed@example.com',replyTo:'reply@example.com'});assert.equal(result.owner.to,'fixed@example.com');assert.equal(result.owner.replyTo,data.email);assert.equal(result.customer.replyTo,'reply@example.com');assert.ok(result.owner.html.includes('&lt;script&gt;'));assert.ok(!result.owner.html.includes('<script>'));assert.ok(!result.customer.html.includes('untrusted.invalid'));assert.ok(result.owner.text.includes(data.message));assert.ok(result.customer.text.includes('0.25 kg'));assert.ok(result.customer.html.includes('does not confirm an order or payment'))});

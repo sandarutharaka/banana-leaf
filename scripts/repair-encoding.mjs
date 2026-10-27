@@ -1,0 +1,3 @@
+import {readFile,writeFile} from 'node:fs/promises';
+const decoder=new TextDecoder('windows-1252');const map=new Map();for(let n=0;n<256;n++)map.set(decoder.decode(Uint8Array.of(n)),n);
+for(const file of ['src/app/page.tsx','src/components/product-card.tsx','src/app/api/contact/route.ts','scripts/preview-emails.tsx']){const source=(await readFile(file,'utf8')).replace(/^\ufeff/,'');if(!/[âÂÃ]/.test(source))continue;const bytes=Array.from(source,c=>{const n=map.get(c);if(n===undefined)throw new Error('Unexpected Unicode; do not blindly convert '+file);return n});await writeFile(file,Buffer.from(bytes).toString('utf8'));console.log('Restored UTF-8: '+file)}

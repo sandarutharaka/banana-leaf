@@ -1,0 +1,2 @@
+import 'server-only';
+export async function verifyTurnstile(token:string,secret:string,hostname:string){if(!token)return false;try{const response=await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret,response:token}),signal:AbortSignal.timeout(5000)});const body=await response.json();return response.ok&&body.success===true&&body.hostname===hostname&&body.action==='contact'}catch{return false}}

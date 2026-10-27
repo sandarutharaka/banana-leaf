@@ -1,0 +1,56 @@
+[
+  {
+    "name": "hero/banana-leaf-arrangement",
+    "format": "webp",
+    "width": 1500,
+    "height": 1000,
+    "channels": 4,
+    "premultiplied": true,
+    "size": 249898
+  },
+  {
+    "name": "products/whole-leaves",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "channels": 4,
+    "premultiplied": true,
+    "size": 129524
+  },
+  {
+    "name": "products/cut-leaves",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "channels": 4,
+    "premultiplied": true,
+    "size": 101918
+  },
+  {
+    "name": "products/bulk-leaves",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "channels": 4,
+    "premultiplied": true,
+    "size": 132864
+  },
+  {
+    "name": "gallery/leaf-detail",
+    "format": "webp",
+    "width": 1400,
+    "height": 1050,
+    "channels": 3,
+    "premultiplied": false,
+    "size": 127554
+  },
+  {
+    "name": "gallery/serving-scene",
+    "format": "webp",
+    "width": 1200,
+    "height": 900,
+    "channels": 3,
+    "premultiplied": false,
+    "size": 118558
+  }
+]

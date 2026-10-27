@@ -1,0 +1,4 @@
+import Link from 'next/link';
+export function Button({href,children,secondary=false,className=''}:{href:string;children:React.ReactNode;secondary?:boolean;className?:string}){return <Link className={`button ${secondary?'secondary':''} ${className}`} href={href}>{children}<span aria-hidden="true">↗</span></Link>}
+export function SectionHeading({eyebrow,title,description}:{eyebrow:string;title:string;description?:string}){return <div className="section-heading" data-reveal><p className="eyebrow">{eyebrow}</p><h2>{title}</h2>{description&&<p className="lede">{description}</p>}</div>}
+export function LeafMark(){return <svg viewBox="0 0 40 48" width="30" height="36" aria-hidden="true"><path d="M31 3C6 6 1 23 12 36C30 39 39 23 31 3Z" fill="none" stroke="currentColor" strokeWidth="1.5"/><path d="M8 46L30 8M14 35L12 18M20 24L31 20" fill="none" stroke="currentColor" strokeWidth="1.5"/></svg>}

@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'./tests/browser',fullyParallel:false,workers:1,timeout:30000,use:{baseURL:'http://localhost:3100',headless:true,trace:'retain-on-failure',launchOptions:{executablePath:process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE}},reporter:[['list']],webServer:{command:'npm.cmd run start -- --port 3100',url:'http://localhost:3100',reuseExistingServer:false,env:{NEXT_DIST_DIR:'.next-production',SITE_URL:'http://localhost:3100',ALLOWED_ORIGINS:'http://localhost:3100',EMAIL_MODE:'mock'},timeout:60000}});
